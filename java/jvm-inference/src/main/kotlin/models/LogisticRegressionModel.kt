@@ -43,11 +43,14 @@ public class PreTrainedLogisiticRegressionModel : LogisticRegressionModel {
 
     public constructor(weights: KtNDArray<Double>) {
         this.weights = weights
-        this.intercept = zeros(1, weights.ndim)
+        this.intercept = zeros(1)
     }
 
     public constructor(weightsFile: String, interceptFile: String) {
         this.weights = loadtxt(weightsFile)
+        // for some reason extracting single scalar fails here,
+        // so instead type is KtNDArray, when manually creating it
+        // we should create it so it behaves as scalar (zeroes(1))
         this.intercept = loadtxt(interceptFile)
     }
 
