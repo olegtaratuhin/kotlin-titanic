@@ -1,0 +1,4 @@
+# Default ignored files
+/workspace.xml
+/python/notebooks/.ipynb_checkpoints/*
+/python/.idea/*

@@ -1,0 +1,10 @@
+# Default ignored files
+/workspace.xml
+/java/.idea/.name
+/java/jvm-inference/build/*
+/java/jvm-inference/.gradle/*
+/java/.gradle/*
+/java/.idea/*
+/java/jvm-inference/build/classes/kotlin/test/EstimatorTest.class
+/java/jvm-inference/.gradle/5.2.1/executionHistory/executionHistory.bin
+/java/jvm-inference/.gradle/5.2.1/executionHistory/executionHistory.lock
