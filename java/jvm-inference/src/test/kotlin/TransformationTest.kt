@@ -86,7 +86,7 @@ class TransformationTest {
         Assert.assertFalse(min == 0.0)
         Assert.assertFalse(max == 1.0)
 
-        val normalizer = Normalizer(listOf("col1"))
+        val normalizer = Normalizer("col1")
         dataToNormalize.apply(normalizer)
 
         val newColumn = dataToNormalize["col1"].asDoubles().filterNotNull()

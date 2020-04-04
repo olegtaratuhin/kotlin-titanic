@@ -8,7 +8,7 @@ import org.apache.commons.csv.CSVFormat
 
 public class Titanic : Dataset {
 
-    private val pathTest = javaClass.classLoader.getResource("data/titanic/train.csv")
+    private val pathTest = javaClass.classLoader.getResource("data/titanic/test.csv")
     private val schemaTest = "schema/titanic/test.json"
     private val typesTest = mapOf(
         "PassengerId" to ColType.String,
@@ -24,7 +24,7 @@ public class Titanic : Dataset {
         "Embarked" to ColType.String
     )
 
-    private val pathTrain = javaClass.classLoader.getResource("data/titanic/test.csv")
+    private val pathTrain = javaClass.classLoader.getResource("data/titanic/train.csv")
     private val schemaTrain = "schema/titanic/train.json"
     private val typesTrain = typesTest.plus("Survived" to ColType.Int)
 
@@ -55,6 +55,10 @@ public class Titanic : Dataset {
         }
     }
 
+    /**
+     * Missing values parsing with type other than String seems to fail in
+     * krangl, todo: PR with parsing missing values, by default to be imputed with null
+     */
     private fun imputeMissingAsDoubles(dataFrame: DataFrame): DataFrame =
         dataFrame.addColumn("Age") {
             it["Age"].map<String> { it ->

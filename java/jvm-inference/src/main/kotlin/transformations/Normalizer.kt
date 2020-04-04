@@ -3,8 +3,20 @@ package transformations
 import krangl.DataFrame
 import krangl.asDoubles
 
-public class Normalizer(private val columns: Iterable<String>, private val method: Method = Method.MinMax()) :
-    Transformation {
+public class Normalizer : Transformation {
+
+    private val columns: Iterable<String>
+    private val method: Method
+
+    constructor(vararg columns: String, method: Method = Method.MinMax()) {
+        this.columns = columns.toList()
+        this.method = method
+    }
+
+    constructor(columns: List<String>, method: Method = Method.MinMax()) {
+        this.columns = columns
+        this.method = method
+    }
 
     public sealed class Method {
         public data class MinMax(val a: Double = 0.0, val b: Double = 1.0) : Method()

@@ -5,11 +5,13 @@ import org.jetbrains.numkt.core.KtNDArray
 import org.jetbrains.numkt.linalg.dot
 import org.jetbrains.numkt.loadtxt
 import org.jetbrains.numkt.math.*
+import org.jetbrains.numkt.zeros
 
 @ExperimentalNumkt
 public abstract class LogisticRegressionModel : Model {
 
     abstract val weights: KtNDArray<Double>
+    abstract val intercept: KtNDArray<Double>
 
     abstract override fun fit(matrix: KtNDArray<Double>, target: KtNDArray<Double>)
 
@@ -22,27 +24,35 @@ public abstract class LogisticRegressionModel : Model {
     }
 
     public override fun predictProba(matrix: KtNDArray<Double>): KtNDArray<Double> {
-        return sigmoid(dot(matrix, weights))
+        return sigmoid(dot(matrix, weights).minus(intercept))
     }
 }
 
 @ExperimentalNumkt
 fun sigmoid(x: KtNDArray<Double>): KtNDArray<Double> {
-    return 1 / (1 + exp(x * -1))
+    return 1 / (1 + exp(-x))
 }
 
 @ExperimentalNumkt
-public class PretrainedLogisiticRegressionModel : LogisticRegressionModel {
+public class PreTrainedLogisiticRegressionModel : LogisticRegressionModel {
+
+    public constructor(weights: KtNDArray<Double>, intercept: KtNDArray<Double>) {
+        this.weights = weights
+        this.intercept = intercept
+    }
 
     public constructor(weights: KtNDArray<Double>) {
         this.weights = weights
+        this.intercept = zeros(1, weights.ndim)
     }
 
-    public constructor(weightsFile: String) {
+    public constructor(weightsFile: String, interceptFile: String) {
         this.weights = loadtxt(weightsFile)
+        this.intercept = loadtxt(interceptFile)
     }
 
     public override val weights: KtNDArray<Double>
+    override val intercept: KtNDArray<Double>
 
     public override fun fit(matrix: KtNDArray<Double>, target: KtNDArray<Double>) {
     }

@@ -1,4 +1,4 @@
-import models.PretrainedLogisiticRegressionModel
+import models.PreTrainedLogisiticRegressionModel
 import org.jetbrains.numkt.array
 import org.jetbrains.numkt.core.ExperimentalNumkt
 import org.junit.Assert
@@ -9,7 +9,7 @@ class EstimatorTest {
 
     @Test
     fun testLogisitcRegression() {
-        val model = PretrainedLogisiticRegressionModel(weights = array(arrayOf(1.0, 1.0)))
+        val model = PreTrainedLogisiticRegressionModel(weights = array(arrayOf(1.0, 1.0)))
         val matrix = array<Double>(listOf(listOf(2, 0), listOf(0, -3)))
         val predictions = model.predict(matrix)
 
@@ -17,10 +17,19 @@ class EstimatorTest {
     }
 
     @Test
-    fun testLogisitcRegressionThreshold() {
-        val model = PretrainedLogisiticRegressionModel(weights = array(arrayOf(1.0, 1.0)))
+    fun testLogisitcRegressionThreshold0() {
+        val model = PreTrainedLogisiticRegressionModel(weights = array(arrayOf(1.0, 1.0)))
         val matrix = array<Double>(listOf(listOf(2, 0), listOf(0, -3)))
-        val predictions = model.predict(matrix, 0.9)
+        val predictions = model.predict(matrix, 0.0)
+
+        Assert.assertEquals(array<Double>(listOf(1, 1)), predictions)
+    }
+
+    @Test
+    fun testLogisitcRegressionThreshold1() {
+        val model = PreTrainedLogisiticRegressionModel(weights = array(arrayOf(1.0, 1.0)))
+        val matrix = array<Double>(listOf(listOf(2, 0), listOf(0, -3)))
+        val predictions = model.predict(matrix, 1.0)
 
         Assert.assertEquals(array<Double>(listOf(-1, -1)), predictions)
     }
