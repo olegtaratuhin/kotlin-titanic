@@ -1,4 +1,12 @@
 import data.Titanic
+import data.Titanic.Fields.age
+import data.Titanic.Fields.fare
+import data.Titanic.Fields.pClass
+import data.Titanic.Fields.parch
+import data.Titanic.Fields.passengerId
+import data.Titanic.Fields.sex
+import data.Titanic.Fields.sibSp
+import data.Titanic.Fields.survived
 import krangl.dataFrameOf
 import krangl.writeCSV
 import models.PreTrainedFactory
@@ -11,15 +19,6 @@ import java.io.File
 @ExperimentalNumkt
 fun main(args: Array<String>) {
     val titanic = Titanic().loadTest()!!
-
-    val passengerId = "PassengerId"
-    val fare = "Fare"
-    val pClass = "Pclass"
-    val sex = "Sex"
-    val age = "Age"
-    val sibSp = "SibSp"
-    val parch = "Parch"
-    val survived = "Survived"
 
     titanic.sortedBy(passengerId)
     val model = PreTrainedFactory.getPreTrainedModel()
@@ -40,7 +39,7 @@ fun main(args: Array<String>) {
     println(sub)
 
     sub.writeCSV(
-        File("Log_reg_kotlin.csv"),
+        File("logreg_kotlin.csv"),
         format = CSVFormat.DEFAULT.withHeader(passengerId, survived)
     )
 }

@@ -8,7 +8,7 @@ import org.jetbrains.numkt.math.*
 import org.jetbrains.numkt.zeros
 
 @ExperimentalNumkt
-public abstract class LogisticRegressionModel : Model {
+public abstract class LogisticRegressionModel : CustomModel {
 
     abstract val weights: KtNDArray<Double>
     abstract val intercept: KtNDArray<Double>

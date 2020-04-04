@@ -19,7 +19,6 @@ dependencies {
 
     // for models
     implementation("org.jetbrains:kotlin-numpy:0.1.4")
-    implementation("com.github.haifengl:smile-kotlin:2.3.0")
 
     testCompile("junit", "junit", "4.12")
 }

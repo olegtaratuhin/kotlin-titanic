@@ -4,7 +4,7 @@ import org.jetbrains.numkt.core.ExperimentalNumkt
 import org.jetbrains.numkt.core.KtNDArray
 
 @ExperimentalNumkt
-interface Model {
+interface CustomModel {
 
     public fun fit(matrix: KtNDArray<Double>, target: KtNDArray<Double>)
 
