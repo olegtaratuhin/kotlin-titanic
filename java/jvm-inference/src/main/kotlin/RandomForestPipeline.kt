@@ -9,7 +9,7 @@ import data.Titanic.Fields.sibSp
 import data.Titanic.Fields.survived
 import krangl.dataFrameOf
 import krangl.writeCSV
-import models.RandomForestClassifier
+import models.RandomForestModel
 import pipeline.InferenceClassificationPipeline
 import transformations.*
 import java.io.File
@@ -18,7 +18,7 @@ fun main(args: Array<String>) {
     val titanic = Titanic().loadTest()!!
 
     titanic.sortedBy(passengerId)
-    val model = RandomForestClassifier(survived)
+    val model = RandomForestModel(survived)
     val result = InferenceClassificationPipeline(
         FeatureSelector(fare, pClass, sex, age, sibSp, parch),
         FillNa(fare, FillNa.Method.Mean),

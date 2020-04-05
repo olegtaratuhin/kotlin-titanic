@@ -21,7 +21,7 @@ fun main(args: Array<String>) {
     val titanic = Titanic().loadTest()!!
 
     titanic.sortedBy(passengerId)
-    val model = PreTrainedFactory.getPreTrainedModel()
+    val model = PreTrainedFactory.getPretrainedLogisitcRegression()
     val result = InferenceClassificationPipeline(
         FeatureSelector(fare, pClass, sex, age, sibSp, parch),
         FillNa(fare, FillNa.Method.Mean),

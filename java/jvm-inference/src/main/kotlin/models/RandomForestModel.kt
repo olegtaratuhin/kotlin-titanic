@@ -3,11 +3,9 @@ package models
 import krangl.DataFrame
 import krangl.dataFrameOf
 import krangl.toDoubleMatrix
-import models.generated.SVC
+import models.generated.RandomForest
 
-class SupportVectorMachineClassifier(private val header: String) : PredictiveModel {
-
-    private val svc = SVC.create()!!
+class RandomForestModel(private val header: String) : PredictiveModel {
 
     private fun extract(matrix: Array<DoubleArray>, row: Int): DoubleArray {
         return DoubleArray(matrix.size) { index ->
@@ -19,7 +17,7 @@ class SupportVectorMachineClassifier(private val header: String) : PredictiveMod
         val matrix = dataFrame.toDoubleMatrix()
 
         return dataFrameOf(header)(List<Int>(dataFrame.nrow) { index ->
-            svc.predict(extract(matrix, index))
+            RandomForest.predict(extract(matrix, index))
         })
     }
 }

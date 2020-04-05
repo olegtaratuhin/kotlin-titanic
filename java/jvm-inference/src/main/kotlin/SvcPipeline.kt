@@ -9,7 +9,7 @@ import data.Titanic.Fields.sibSp
 import data.Titanic.Fields.survived
 import krangl.dataFrameOf
 import krangl.writeCSV
-import models.SupportVectorMachineClassifier
+import models.SupportVectorMachineModel
 import org.jetbrains.numkt.core.ExperimentalNumkt
 import pipeline.InferenceClassificationPipeline
 import transformations.*
@@ -20,7 +20,7 @@ fun main(args: Array<String>) {
     val titanic = Titanic().loadTest()!!
 
     titanic.sortedBy(passengerId)
-    val model = SupportVectorMachineClassifier(survived)
+    val model = SupportVectorMachineModel(survived)
     val result = InferenceClassificationPipeline(
         FeatureSelector(fare, pClass, sex, age, sibSp, parch),
         FillNa(fare, FillNa.Method.Mean),
