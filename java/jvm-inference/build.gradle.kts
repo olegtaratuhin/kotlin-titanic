@@ -19,6 +19,7 @@ dependencies {
 
     // for models
     implementation("org.jetbrains:kotlin-numpy:0.1.4")
+    implementation("ai.catboost:catboost-prediction:0.22")
 
     testCompile("junit", "junit", "4.12")
 }
